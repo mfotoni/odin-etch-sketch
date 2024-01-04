@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let sizeButton = document.createElement("button");
   document.body.append(sizeButton);
   sizeButton.textContent = "Adjust size of the grid";
-  // sizeButton.style.top = "10px";
   sizeButton.style.position = "absolute";
   sizeButton.style.display = "flex";
   sizeButton.style.justifyContent = "center";
@@ -11,16 +10,32 @@ document.addEventListener("DOMContentLoaded", function () {
   sizeButton.style.justifySelf = "center";
   sizeButton.style.transform = "translateX(-50%)";
 
+  let backgroundClassicButton = document.createElement("button");
+  backgroundClassicButton.textContent = "Classic mode";
+  document.body.append(backgroundClassicButton);
+  backgroundClassicButton.style.position = "absolute";
+  backgroundClassicButton.style.top = "5%";
+
+  let backgroundRainbowButton = document.createElement("button");
+  backgroundRainbowButton.textContent = "Rainbow mode";
+  backgroundRainbowButton.style.position = "absolute";
+  backgroundRainbowButton.style.top = "10%";
+  document.body.append(backgroundRainbowButton);
+
   let userInput = 16;
+  let divMaster = document.querySelector("#container");
+  divMaster.style.width = "960px";
+  divMaster.style.height = "960px";
+  divMaster.style.margin = "0 auto";
 
   function gridSize() {
     userInput = prompt("Enter a number of squares per side");
   }
   // sizeButton.addEventListener("click", gridSize);
 
-  let divMaster = document.querySelector("#container");
-
   function createGrid() {
+    divMaster.innerHTML = "";
+
     for (let y = 0; y < userInput; y++) {
       // Cria uma div para cada linha
       let row = document.createElement("div");
@@ -35,32 +50,35 @@ document.addEventListener("DOMContentLoaded", function () {
         cell.style.width = "20px";
         cell.style.display = "flex";
         cell.style.boxSizing = "border-box";
+        cell.style.alignItems = "stretch";
 
         // Adiciona a célula à linha
         row.append(cell);
         row.style.display = "flex";
         row.style.justifyContent = "center";
-
-        let blah = document.querySelectorAll(".blah");
-        for (let i = 0; i < blah.length; i++) {
-          blah[i].onclick = function (e) {
-            {
-              e.target.style.backgroundColor = background();
-            }
-          };
-        }
       }
       // Adiciona a linha ao container mestre
       divMaster.append(row);
-      divMaster.style.marginTop = "10%";
+      divMaster.style.marginTop = "6%";
     }
+
+    let blah = document.querySelectorAll(".blah");
+
+    blah.forEach(function (item) {
+      item.onclick = function (e) {
+        e.target.style.backgroundColor = backgroundRainbow();
+      };
+    });
   }
-  // let blah = document.querySelectorAll(".blah");
-  // blah.forEach(function (item) {
-  //   item.onclick = function (e) {
-  //     e.target.style.backgroundColor = "grey";
-  //   };
-  // });
+
+  function backgroundClassic() {
+    let blah = document.querySelectorAll(".blah");
+    blah.forEach(function (item) {
+      item.onclick = function (e) {
+        e.target.style.backgroundColor = "grey";
+      };
+    });
+  }
 
   //Call the function to create the create grid when the page is load for the first time
   createGrid();
@@ -69,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return Math.floor(Math.random() * colors);
   }
 
-  function background() {
+  function backgroundRainbow() {
     const colorR =
       "rgb(" + random(255) + "," + random(255) + "," + random(255) + ")";
     return colorR;
@@ -79,4 +97,5 @@ document.addEventListener("DOMContentLoaded", function () {
     gridSize();
     createGrid();
   });
+  backgroundClassicButton.addEventListener("click", backgroundClassic);
 });
