@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   sizeButton.style.justifySelf = "center";
   sizeButton.style.transform = "translateX(-50%)";
 
-  let userInput;
+  let userInput = 16;
 
   function gridSize() {
     userInput = prompt("Enter a number of squares per side");
@@ -61,6 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
   //     e.target.style.backgroundColor = "grey";
   //   };
   // });
+
+  //Call the function to create the create grid when the page is load for the first time
+  createGrid();
 
   function random(colors) {
     return Math.floor(Math.random() * colors);
