@@ -63,10 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     let blah = document.querySelectorAll(".blah");
-
     blah.forEach(function (item) {
       item.onclick = function (e) {
-        e.target.style.backgroundColor = backgroundRainbow();
+        e.target.style.backgroundColor = "grey";
       };
     });
   }
@@ -88,9 +87,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function backgroundRainbow() {
-    const colorR =
-      "rgb(" + random(255) + "," + random(255) + "," + random(255) + ")";
-    return colorR;
+    let blah = document.querySelectorAll(".blah");
+    blah.forEach(function (item) {
+      item.onclick = function (e) {
+        const colorR =
+          "rgb(" + random(255) + "," + random(255) + "," + random(255) + ")";
+        e.target.style.backgroundColor = colorR;
+      };
+    });
   }
 
   sizeButton.addEventListener("click", function () {
@@ -98,4 +102,5 @@ document.addEventListener("DOMContentLoaded", function () {
     createGrid();
   });
   backgroundClassicButton.addEventListener("click", backgroundClassic);
+  backgroundRainbowButton.addEventListener("click", backgroundRainbow);
 });
